@@ -1,8 +1,15 @@
-FROM nginx
-RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+FROM nginx:latest
+
+#RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY ./default.conf /etc/nginx/conf.d/default.conf
+
 COPY ./index.html /usr/share/nginx/html
-COPY ./default.conf /etc/nginx
-VOLUME /usr/share/nginx/html
-VOLUME /etc/nginx
+
+WORKDIR /pr11ci
+
+VOLUME /pr11ci
+
 EXPOSE 80
+
 CMD ["nginx", "-g", "daemon off;"]
